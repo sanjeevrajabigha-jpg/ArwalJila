@@ -4,83 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arwal District Guide | अरवल जिला</title>
-    <!-- Tailwind CSS (Design ke liye) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="arwal-data.js"></script> 
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
     
-    <!-- Navigation Bar -->
     <nav class="bg-blue-800 text-white p-4 shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-xl font-bold">📍 अरवल जिला गाइड</div>
-            <div class="space-x-4 text-sm font-semibold">
-                <a href="#" class="hover:text-orange-300">होम</a>
-                <a href="#blocks" class="hover:text-orange-300">प्रखंड</a>
-            </div>
+            <div class="text-xl font-bold flex items-center gap-2">📍 अरवल जिला दर्शन</div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="p-4 max-w-5xl mx-auto mb-10 flex-grow w-full">
-        
-        <!-- Hero Section -->
-        <section class="bg-blue-700 text-white p-8 md:p-12 rounded-xl text-center shadow-lg mt-4 mb-8">
+    <main class="p-4 max-w-6xl mx-auto mb-10 flex-grow w-full">
+        <section class="bg-blue-700 text-white p-8 rounded-xl text-center shadow-lg mt-4 mb-10">
             <h1 class="text-3xl md:text-5xl font-bold mb-4">अरवल जिला में आपका स्वागत है</h1>
-            <p class="text-blue-100 text-sm md:text-lg max-w-2xl mx-auto">
-                बिहार के मगध क्षेत्र में स्थित, अरवल एक ऐतिहासिक और सांस्कृतिक रूप से समृद्ध जिला है। यहाँ जिले की प्रशासनिक, पर्यटन और अन्य महत्वपूर्ण जानकारियाँ प्राप्त करें।
-            </p>
+            <p class="text-blue-100 max-w-3xl mx-auto">बिहार के मगध क्षेत्र में स्थित, अरवल एक ऐतिहासिक और सांस्कृतिक रूप से समृद्ध जिला है।</p>
         </section>
 
-        <!-- Administrative Dashboard -->
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 border-l-4 border-blue-500 pl-3 text-gray-800">प्रशासनिक जानकारी</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 border-l-4 border-blue-500 pl-3">प्रशासनिक जानकारी</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                 
-                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
                     <div class="text-4xl mb-2">🏢</div>
-                    <div class="text-3xl font-bold text-gray-800">5</div>
+                    <div class="text-3xl font-bold">5</div>
                     <div class="text-gray-500 text-sm font-semibold mt-1">प्रखंड (Blocks)</div>
                 </div>
                 
-                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+                <div onclick="openModal('panchayat')" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-green-500 hover:bg-green-50 transition cursor-pointer transform hover:-translate-y-1">
                     <div class="text-4xl mb-2">👥</div>
-                    <div class="text-3xl font-bold text-gray-800">65</div>
-                    <div class="text-gray-500 text-sm font-semibold mt-1">पंचायतें</div>
+                    <div class="text-3xl font-bold">65</div>
+                    <div class="text-green-700 text-sm font-bold mt-1 bg-green-100 py-1 rounded animate-pulse">पंचायतें (क्लिक करें)</div>
                 </div>
                 
-                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500">
+                <div onclick="openModal('village')" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-500 hover:bg-orange-50 transition cursor-pointer transform hover:-translate-y-1">
                     <div class="text-4xl mb-2">🗺️</div>
-                    <div class="text-3xl font-bold text-gray-800">335</div>
-                    <div class="text-gray-500 text-sm font-semibold mt-1">गाँव</div>
+                    <div class="text-3xl font-bold">335</div>
+                    <div class="text-orange-600 text-sm font-bold mt-1 bg-orange-100 py-1 rounded animate-pulse">गाँव (क्लिक करें)</div>
                 </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-red-500">
+
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-500">
                     <div class="text-4xl mb-2">🛡️</div>
-                    <div class="text-3xl font-bold text-gray-800">11</div>
+                    <div class="text-3xl font-bold">11</div>
                     <div class="text-gray-500 text-sm font-semibold mt-1">पुलिस स्टेशन</div>
                 </div>
 
             </div>
         </section>
-
-        <!-- Blocks Section -->
-        <section id="blocks" class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 border-l-4 border-orange-500 pl-3 text-gray-800">सभी प्रखंड (Blocks)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <div class="bg-blue-50 p-4 rounded-lg text-blue-900 font-bold border border-blue-100 shadow-sm">अरवल (Arwal)</div>
-                <div class="bg-blue-50 p-4 rounded-lg text-blue-900 font-bold border border-blue-100 shadow-sm">कलेर (Kaler)</div>
-                <div class="bg-blue-50 p-4 rounded-lg text-blue-900 font-bold border border-blue-100 shadow-sm">करपी (Karpi)</div>
-                <div class="bg-blue-50 p-4 rounded-lg text-blue-900 font-bold border border-blue-100 shadow-sm">कुर्था (Kurtha)</div>
-                <div class="bg-blue-50 p-4 rounded-lg text-blue-900 font-bold border border-blue-100 shadow-sm">सोनभद्र वंशी सूर्यपुर</div>
-            </div>
-        </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 text-center border-t-4 border-orange-500 mt-auto">
-        <p>© 2026 Arwal District Guide. All rights reserved.</p>
-    </footer>
+    <div id="dataModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-70 z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden">
+            
+            <div id="modalHeader" class="p-5 border-b flex justify-between items-center text-white">
+                <div>
+                    <h3 id="modalTitle" class="text-2xl font-bold">List</h3>
+                    <p id="modalCount" class="text-xs mt-1">Loading...</p>
+                </div>
+                <button onclick="closeModal()" class="text-4xl font-bold hover:text-gray-200 leading-none">&times;</button>
+            </div>
+            
+            <div class="p-4 bg-gray-50 border-b">
+                <input type="text" id="searchInput" onkeyup="searchItems()" placeholder="नाम खोजें (Search)..." class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 text-gray-700 font-medium">
+            </div>
 
+            <div class="p-4 overflow-y-auto flex-grow bg-gray-100">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="listContainer">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentListType = ''; // Track if village or panchayat is open
+
+        function openModal(type) {
+            currentListType = type;
+            const modal = document.getElementById('dataModal');
+            const header = document.getElementById('modalHeader');
+            const title = document.getElementById('modalTitle');
+            const count = document.getElementById('modalCount');
+            const container = document.getElementById('listContainer');
+            
+            container.innerHTML = ''; // Clear old data
+
+            let dataArray = [];
+            let icon = '';
+            let label = '';
+
+            if(type === 'panchayat') {
+                dataArray = panchayatList; // Comes from arwal-data.js
+                header.className = "p-5 border-b flex justify-between items-center bg-gradient-to-r from-green-500 to-green-600 text-white";
+                title.innerText = "अरवल जिले की पंचायतें";
+                count.innerText = `कुल: ${dataArray.length} / 65`;
+                icon = '👥';
+                label = 'पंचायत';
+            } else {
+                dataArray = villageList; // Comes from arwal-data.js
+                header.className = "p-5 border-b flex justify-between items-center bg-gradient-to-r from-orange-500 to-orange-600 text-white";
+                title.innerText = "अरवल जिले के गाँव";
+                count.innerText = `कुल: ${dataArray.length} / 335`;
+                icon = '🏡';
+                label = 'गाँव';
+            }
+
+            // Generate Cards
+            dataArray.forEach(item => {
+                container.innerHTML += `
+                <div class="p-4 bg-white border border-gray-200 shadow-sm rounded-xl flex items-center gap-4 list-item">
+                    <div class="bg-gray-100 p-3 rounded-full text-xl shadow-inner">${icon}</div>
+                    <div class="text-left w-full">
+                        <h4 class="font-bold text-gray-800 text-sm item-name">${item}</h4>
+                        <p class="text-[10px] text-gray-500 uppercase font-bold tracking-wider mt-1">${label} • अरवल</p>
+                    </div>
+                </div>`;
+            });
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('dataModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            document.getElementById('searchInput').value = "";
+        }
+
+        function searchItems() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let items = document.getElementsByClassName('list-item');
+            
+            for (let i = 0; i < items.length; i++) {
+                let name = items[i].querySelector('.item-name').innerText.toLowerCase();
+                if (name.includes(input)) {
+                    items[i].style.display = "flex";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
