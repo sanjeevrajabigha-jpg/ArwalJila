@@ -8,16 +8,19 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
     
+    <!-- Navigation -->
     <nav class="bg-blue-800 text-white p-4 shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto font-bold text-lg">📍 अरवल जिला दर्शन</div>
     </nav>
 
+    <!-- Main Content -->
     <main class="p-4 max-w-6xl mx-auto mb-10 flex-grow w-full">
         <section class="bg-blue-700 text-white p-8 rounded-xl text-center shadow-lg mt-4 mb-10">
             <h1 class="text-3xl font-bold mb-2">अरवल जिला में आपका स्वागत है</h1>
             <p class="text-blue-100">बिहार का ऐतिहासिक और समृद्ध जिला।</p>
         </section>
 
+        <!-- Stats Section -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
             
             <div onclick="openModal('block')" class="bg-white p-4 rounded-xl shadow-md border-t-4 border-blue-500 cursor-pointer hover:bg-blue-50">
@@ -47,25 +50,28 @@
         </div>
     </main>
 
+    <!-- Popup Modal -->
     <div id="dataModal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-[60] flex items-center justify-center p-4">
         <div class="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] flex flex-col overflow-hidden">
-            
             <div id="modalHeader" class="p-4 flex justify-between items-center text-white">
                 <h3 id="modalTitle" class="font-bold text-lg">List</h3>
                 <button onclick="closeModal()" class="text-3xl leading-none">&times;</button>
             </div>
-            
             <div class="p-4 overflow-y-auto bg-gray-50 flex-grow" id="listContainer">
-                </div>
-            
+            </div>
         </div>
     </div>
 
+    <!-- JavaScript For Popup -->
     <script>
-        // Data Arrays - Yahan comma (,) aur inverted comma (" ") ka dhyan rakhein
-        const blockList = ["अरवल", "कलेर", "करपी", "कुर्था", "सोनभद्र वंशी सूर्यपुर"];
-        const panchayatList = ["पंचायत-1", "पंचायत-2", "पंचायत-3", "पंचायत-4", "पंचायत-5"]; // Yahan aur naam jodein
-        const villageList = ["गाँव-1", "गाँव-2", "गाँव-3", "गाँव-4", "गाँव-5"]; // Yahan aur naam jodein
+        // 1. Block Data
+        const blockList = ["अरवल (Arwal)", "कलेर (Kaler)", "करपी (Karpi)", "कुर्था (Kurtha)", "सोनभद्र वंशी सूर्यपुर"];
+
+        // 2. Panchayat Data
+        const panchayatList = ["ऐयरा", "बैदराबाद", "भदासा", "फखरपुर", "हैबतपुर", "कौआ", "खरासी", "प्रसादी इंग्लिश", "सरौती", "वालिदाद", "मेहंदिया", "पारा", "बेलसार", "हथियारा", "रोहई", "सोहसा", "तेरारी", "कमालपुर", "करपी", "किंजर", "शहर तेलपा", "पुरन", "बम्भा", "कचहरी", "मानिकपुर", "नवाबपुर", "सचई", "खटांगी", "सोनभद्र", "वंशी", "सूर्यपुर", "चमंडी", "नरगा"];
+
+        // 3. Village Data
+        const villageList = ["अरवल", "करपी", "कलेर", "कुर्था", "सोनभद्र", "अब्गिल्ला", "ऐयरा", "बैदराबाद", "बम्भा", "भदासा", "चमंडी", "देवी बीघा", "फखरपुर", "फुलसथर", "हैबतपुर", "इंजोर", "किंजर", "मकबूलपुर", "मानिकपुर", "मेहंदिया", "मिर्ज़ापुर", "नगला बही", "नगला पोखर", "नरगा", "निरखपुर", "पूरन", "रामपुर", "रोहारी", "शहर तेलपा", "सकरा", "समनपुर", "सरौती", "सिमुआरा", "वालिदाद", "वसीला"];
 
         function openModal(type) {
             const modal = document.getElementById('dataModal');
@@ -73,33 +79,30 @@
             const title = document.getElementById('modalTitle');
             const header = document.getElementById('modalHeader');
             
-            // Purana data saaf karein
-            container.innerHTML = '';
+            container.innerHTML = ''; 
 
-            // Naya data check karein aur lagayein
             if (type === 'block') {
                 title.innerText = "अरवल जिले के प्रखंड";
                 header.className = "p-4 flex justify-between items-center text-white bg-blue-600";
                 blockList.forEach(function(item) {
-                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm">🏢 ' + item + '</div>';
+                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm font-medium">🏢 ' + item + '</div>';
                 });
             } 
             else if (type === 'panchayat') {
                 title.innerText = "अरवल जिले की पंचायतें";
                 header.className = "p-4 flex justify-between items-center text-white bg-green-600";
                 panchayatList.forEach(function(item) {
-                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm">👥 ' + item + '</div>';
+                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm font-medium">👥 ' + item + '</div>';
                 });
             } 
             else if (type === 'village') {
                 title.innerText = "अरवल जिले के गाँव";
                 header.className = "p-4 flex justify-between items-center text-white bg-orange-600";
                 villageList.forEach(function(item) {
-                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm">🏡 ' + item + '</div>';
+                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm font-medium">🏡 ' + item + '</div>';
                 });
             }
 
-            // Popup dikhayein
             modal.classList.remove('hidden');
         }
 
