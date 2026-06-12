@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arwal District Guide | अरवल जिला</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
     
@@ -22,56 +18,89 @@
             <p class="text-blue-100">बिहार का ऐतिहासिक और समृद्ध जिला।</p>
         </section>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            <div onclick="openModal('block')" class="bg-white p-4 rounded-xl shadow border-t-4 border-blue-500 cursor-pointer hover:bg-blue-50">
-                <div class="text-2xl font-bold">5</div>
-                <div class="text-xs text-gray-500">प्रखंड (Blocks)</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
+            
+            <div onclick="openModal('block')" class="bg-white p-4 rounded-xl shadow-md border-t-4 border-blue-500 cursor-pointer hover:bg-blue-50">
+                <div class="text-3xl mb-1">🏢</div>
+                <div class="text-2xl font-bold text-gray-800">5</div>
+                <div class="text-sm font-bold text-blue-600 bg-blue-100 py-1 mt-2 rounded">प्रखंड (क्लिक करें)</div>
             </div>
-            <div onclick="openModal('panchayat')" class="bg-white p-4 rounded-xl shadow border-t-4 border-green-500 cursor-pointer hover:bg-green-50">
-                <div class="text-2xl font-bold">65</div>
-                <div class="text-xs text-gray-500">पंचायतें</div>
+
+            <div onclick="openModal('panchayat')" class="bg-white p-4 rounded-xl shadow-md border-t-4 border-green-500 cursor-pointer hover:bg-green-50">
+                <div class="text-3xl mb-1">👥</div>
+                <div class="text-2xl font-bold text-gray-800">65</div>
+                <div class="text-sm font-bold text-green-600 bg-green-100 py-1 mt-2 rounded">पंचायतें (क्लिक करें)</div>
             </div>
-            <div onclick="openModal('village')" class="bg-white p-4 rounded-xl shadow border-t-4 border-orange-500 cursor-pointer hover:bg-orange-50">
-                <div class="text-2xl font-bold">335</div>
-                <div class="text-xs text-gray-500">गाँव</div>
+
+            <div onclick="openModal('village')" class="bg-white p-4 rounded-xl shadow-md border-t-4 border-orange-500 cursor-pointer hover:bg-orange-50">
+                <div class="text-3xl mb-1">🗺️</div>
+                <div class="text-2xl font-bold text-gray-800">335</div>
+                <div class="text-sm font-bold text-orange-600 bg-orange-100 py-1 mt-2 rounded">गाँव (क्लिक करें)</div>
             </div>
-            <div class="bg-white p-4 rounded-xl shadow border-t-4 border-red-500">
-                <div class="text-2xl font-bold">11</div>
-                <div class="text-xs text-gray-500">पुलिस स्टेशन</div>
+
+            <div class="bg-white p-4 rounded-xl shadow-md border-t-4 border-red-500">
+                <div class="text-3xl mb-1">🛡️</div>
+                <div class="text-2xl font-bold text-gray-800">11</div>
+                <div class="text-sm font-bold text-gray-500 mt-2">पुलिस स्टेशन</div>
             </div>
+
         </div>
     </main>
 
     <div id="dataModal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-[60] flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[80vh] flex flex-col overflow-hidden">
-            <div id="modalHeader" class="p-4 flex justify-between items-center text-white bg-blue-600">
-                <h3 id="modalTitle" class="font-bold">List</h3>
-                <button onclick="closeModal()" class="text-2xl">&times;</button>
+        <div class="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] flex flex-col overflow-hidden">
+            
+            <div id="modalHeader" class="p-4 flex justify-between items-center text-white">
+                <h3 id="modalTitle" class="font-bold text-lg">List</h3>
+                <button onclick="closeModal()" class="text-3xl leading-none">&times;</button>
             </div>
-            <div class="p-4 overflow-y-auto" id="listContainer"></div>
+            
+            <div class="p-4 overflow-y-auto bg-gray-50 flex-grow" id="listContainer">
+                </div>
+            
         </div>
     </div>
 
     <script>
-        // Data
-        const blockList = ["अरवल", "कलेर", "करपी", "कुर्था", "सोनभद्र"];
-        const panchayatList = ["पंचायत-1", "पंचायत-2", "पंचायत-3", "पंचायत-4", "पंचायत-5"]; // Add all 65
-        const villageList = ["गाँव-1", "गाँव-2", "गाँव-3", "गाँव-4", "गाँव-5"]; // Add all 335
+        // Data Arrays - Yahan comma (,) aur inverted comma (" ") ka dhyan rakhein
+        const blockList = ["अरवल", "कलेर", "करपी", "कुर्था", "सोनभद्र वंशी सूर्यपुर"];
+        const panchayatList = ["पंचायत-1", "पंचायत-2", "पंचायत-3", "पंचायत-4", "पंचायत-5"]; // Yahan aur naam jodein
+        const villageList = ["गाँव-1", "गाँव-2", "गाँव-3", "गाँव-4", "गाँव-5"]; // Yahan aur naam jodein
 
         function openModal(type) {
+            const modal = document.getElementById('dataModal');
             const container = document.getElementById('listContainer');
             const title = document.getElementById('modalTitle');
             const header = document.getElementById('modalHeader');
+            
+            // Purana data saaf karein
             container.innerHTML = '';
-            
-            let data = type === 'block' ? blockList : (type === 'panchayat' ? panchayatList : villageList);
-            title.innerText = type.toUpperCase() + " LIST";
-            header.className = "p-4 flex justify-between items-center text-white bg-" + (type === 'block' ? 'blue' : (type === 'panchayat' ? 'green' : 'orange')) + "-600";
-            
-            data.forEach(item => {
-                container.innerHTML += `<div class="p-2 border-b">${item}</div>`;
-            });
-            document.getElementById('dataModal').classList.remove('hidden');
+
+            // Naya data check karein aur lagayein
+            if (type === 'block') {
+                title.innerText = "अरवल जिले के प्रखंड";
+                header.className = "p-4 flex justify-between items-center text-white bg-blue-600";
+                blockList.forEach(function(item) {
+                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm">🏢 ' + item + '</div>';
+                });
+            } 
+            else if (type === 'panchayat') {
+                title.innerText = "अरवल जिले की पंचायतें";
+                header.className = "p-4 flex justify-between items-center text-white bg-green-600";
+                panchayatList.forEach(function(item) {
+                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm">👥 ' + item + '</div>';
+                });
+            } 
+            else if (type === 'village') {
+                title.innerText = "अरवल जिले के गाँव";
+                header.className = "p-4 flex justify-between items-center text-white bg-orange-600";
+                villageList.forEach(function(item) {
+                    container.innerHTML += '<div class="p-3 mb-2 bg-white border border-gray-200 rounded shadow-sm">🏡 ' + item + '</div>';
+                });
+            }
+
+            // Popup dikhayein
+            modal.classList.remove('hidden');
         }
 
         function closeModal() {
